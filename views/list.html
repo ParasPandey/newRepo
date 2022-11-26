@@ -1,0 +1,58 @@
+<%- include('__layout/header.html') -%>
+<!-- <section class="stage">
+  <%- include('__components/stage.html') -%>
+</section> -->
+<section class="info container">
+  <div class="info-inner">
+    <h2 class="subtitle">There are <%= rentals.length %> houses For Rent</h2>
+    <div class="info-button">
+      <a type="button" class="button primary" href="/rental/new" role="button"
+      >Add New Rental</a
+    ></div>
+  </h1>
+</section>
+
+<section
+  class="list container grid"
+>
+  <% rentals.forEach(function(rental){
+    let formatter = new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD'}); %>
+
+  <div class="card">
+    <img
+      class="card-img-top"
+      src="<%= rental.image %>"
+      alt="<%= rental.name %>"
+    />
+    <div class="card-body">
+      <h4 class="card-title">
+        <%= rental.name %> | <%= formatter.format(rental.price) %>
+      </h4>
+      <span class="smallFonts"><%= rental.location
+        %></span>
+      <p class="card-text">
+        <%= rental.bedrooms %>bedrooms <%= rental.bathrooms %> bathrooms
+      </p>
+      
+      <p class="card-text description"><%= rental.description %></p>
+      
+      
+        <% if (rental.info) { %>
+          <p class="card-text">
+            <a href="<%= rental.image %>">Learn more</a>
+          </p>
+          <% } %>
+
+
+      <a href="rental/edit/<%= rental.id %>" role="button" class="button primary"
+        >Edit</a
+      >
+      <a href="rental/delete/<%= rental.id %>" role="button" class="button danger"
+        >Delete</a
+      >
+    </div>
+  </div>
+  <% }) %>
+</section>
+
+<%- include('__layout/footer.html') -%>
